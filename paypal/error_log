@@ -1,0 +1,34 @@
+[12-May-2019 13:14:53 UTC] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'ReturnUrl is not a fully qualified URL' in /home/isnoyra/public_html/Newfolder/paypal/vendor/paypal/rest-api-sdk-php/lib/PayPal/Validation/UrlValidator.php:23
+Stack trace:
+#0 /home/isnoyra/public_html/Newfolder/paypal/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/RedirectUrls.php(29): PayPal\Validation\UrlValidator::validate('indexStudent.ph...', 'ReturnUrl')
+#1 /home/isnoyra/public_html/Newfolder/paypal/first.php(48): PayPal\Api\RedirectUrls->setReturnUrl('indexStudent.ph...')
+#2 {main}
+  thrown in /home/isnoyra/public_html/Newfolder/paypal/vendor/paypal/rest-api-sdk-php/lib/PayPal/Validation/UrlValidator.php on line 23
+[12-May-2019 15:27:28 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[12-May-2019 15:27:28 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 09:42:51 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 09:42:51 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:36:00 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:36:00 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:40:50 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:40:50 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:41:17 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:41:17 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:41:20 UTC] PHP Warning:  require_once(../init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:41:20 UTC] PHP Fatal error:  require_once(): Failed opening required '../init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:42:13 UTC] PHP Warning:  require_once(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:42:13 UTC] PHP Fatal error:  require_once(): Failed opening required '..\init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:42:48 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:42:48 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:42:48 UTC] PHP Warning:  include(): Failed opening '..\init.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:43:00 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:43:00 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:43:00 UTC] PHP Warning:  include(): Failed opening '..\init.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:44:46 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:44:46 UTC] PHP Warning:  include(..\init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:44:46 UTC] PHP Warning:  include(): Failed opening '..\init.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 3
+[13-May-2019 13:47:52 UTC] PHP Warning:  require_once(init.php): failed to open stream: No such file or directory in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 2
+[13-May-2019 13:47:52 UTC] PHP Fatal error:  require_once(): Failed opening required 'init.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 2
+[13-May-2019 13:48:11 UTC] PHP Fatal error:  Call to undefined function include_path() in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 2
+[13-May-2019 13:48:27 UTC] PHP Fatal error:  Call to undefined function include_path() in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 2
+[13-May-2019 13:48:30 UTC] PHP Fatal error:  Call to undefined function include_path() in /home/isnoyra/public_html/Newfolder/paypal/first.php on line 2

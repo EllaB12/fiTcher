@@ -1,0 +1,14 @@
+<?php
+require_once('database.php');
+require_once('config.php');
+require_once('session.php');
+require_once('student.php');
+require_once('teacher.php');
+require_once('teachermeetings.php');
+require_once('password.php');
+require_once('city.php');
+require_once('subject.php');
+require_once('qualification.php');
+require_once('studentTeacher.php');
+require_once('teachermeetings.php');
+?>

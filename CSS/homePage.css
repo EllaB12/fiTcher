@@ -1,0 +1,137 @@
+*{ box-sizing: border-box; 
+    font-family: "Varela Round";
+}
+
+.nav-link{
+    font-weight: bold;
+    color: #116677 !important;
+    padding-left: 18px !important;
+}
+
+/* .nav-link{
+    color: #444 !important;
+} */
+
+.navbar{
+    background-color: #fff !important;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.3);
+}
+
+
+.dropdown-item{
+    text-align: right;
+    color: #116677;
+}
+
+a:hover { 
+    color: #00A5C6 !important;
+    font-weight: bold !important;
+}
+
+a:hover [class*="some"]{
+    color: #fff !important;
+    font-weight: bold !important;
+}
+
+.navbar-toggler{
+    background-color: none !important;
+    border: none !important;
+}
+
+.to_the_right{
+    text-align: right;
+}
+
+.centro{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.btn{
+    display: block !important;
+    margin: auto !important;
+    padding: 30px !important;
+    width: 40%;
+    height: 30px;
+    padding-top: 15px !important;
+    padding-bottom: 40px !important;
+    background-color: #00A5C6;
+    color: white !important;
+}
+
+.btn:hover{
+    /* background: none !important; */
+    opacity: 0.9 !important;
+    color: white !important;
+}
+
+.card-header{
+    background: #00A5C6 !important;
+    margin: auto;
+    width: 70%;
+}
+
+.card-footer{
+    background: none !important;
+    border: none !important;
+}
+
+/* hr{
+    color: black;
+    width: 70px;
+    height: 50px;
+} */
+
+#aria{
+    padding-bottom: 30px !important; 
+}
+
+.center2{
+    margin: auto;
+    display: block;
+}
+
+.h-100{
+    border:none !important;
+}
+
+.cardi{
+    color:  #053842 !important;
+}
+
+.cardi:hover{
+    font-size: 25px;
+    color: #00A5C6 !important;
+}
+
+.pic{
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.pic:hover img {
+    opacity: 0.7;
+  }
+
+hr{
+    width: 30%;
+    height: 2px;
+    color: #116677;
+}
+
+body{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+.trol{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+#regi{
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+

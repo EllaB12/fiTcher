@@ -1,0 +1,2 @@
+[16-May-2019 19:21:43 UTC] PHP Fatal error:  Call to undefined method Teacher::find_student_by_id() in /home/isnoyra/public_html/Newfolder/Includes/teacher.php on line 225
+[16-May-2019 19:25:38 UTC] PHP Fatal error:  Call to undefined method Student::find_teacher_by_id() in /home/isnoyra/public_html/Newfolder/Includes/student.php on line 178
