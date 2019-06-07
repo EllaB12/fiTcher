@@ -1,4 +1,5 @@
 <?php
+//Get deatails from find for me teacher form
 include_once('Includes/init.php');
 
 if(isset($_POST['submit'])){
@@ -20,7 +21,5 @@ if(isset($_POST['submit'])){
 
 
 header("Location: teachersMatch.php");
-
-
 }
 ?>

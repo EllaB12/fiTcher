@@ -1,4 +1,4 @@
-.container{font-family:verdana}
+.container{font-family: "Varela Round"; font-size:12px;}
 .smallCalContainer{float:left; width:158px; height:153px; border:1px solid #BBCCFF;}
 .bigCalHeader{font-size:12px; background-color:#BBCCFF;}
 .bigCalHeader .showDate{color: #FFFFFF; float:left; text-align:left; padding-left:15px; line-height: 25px;}
@@ -57,10 +57,10 @@
 .modalBack{background-image:url('../img/back6.png');z-index: 1;}
 .modalContainer{margin:50px auto; width:0px; height:0px;}
 .modal .modalTop{background-color:#BBCCFF; padding:5px; height:24px;}
-.modal .modalDateToShow{color: #FFFFFF; float:left; font-size:16px; font-weight:bold; padding-top: 4px; width:464px; height: 100%;}
+.modal .modalDateToShow{color: #FFFFFF; float:left; font-size:16px; font-weight:bold; padding-top: 4px; width:464px; height: 100%; font-family:"Varela Round"}
 .modal .closeButton{cursor:pointer; height:24px; width:24px; float:left; background-image:url('../JS/calendar/img/close.png');}
 .modal .mainContainer{margin:20px auto; width:370px; font-size:14px;}
-.modal .modalTableClass{margin:20px auto; width:450px; font-size:14px; height:230px; overflow: auto;}
+.modal .modalTableClass{margin:20px auto; width:450px; font-size:14px; height:230px; overflow: auto; font-family:"Varela Round";}
 .modal .modalTable{text-align:left; width:100%}
 .modal .modalTable td{background-color: #E3E9FF; font-size:12px;}
 .modal .modalTable th{background-color: #DDE5FF; color:white;}
@@ -83,4 +83,4 @@
 .formRowSubmit{text-align:right;border-top:1px solid #B8C7F6;margin-top:10px;padding-top:10px;}
 
 .searchDiv{margin-top:10px;}
-.searchDiv input{border: 1px solid #BBCCFF; border-radius: 5px 5px 5px 5px;color: #666666;font-family: verdana;font-size: 16px;height: 31px;padding-left:10px;padding-right:10px; padding-bottom:3px;width: 138px;}
+.searchDiv input{border: 1px solid #BBCCFF; border-radius: 5px 5px 5px 5px;color: #666666;font-family: "Varela Round";font-size: 16px;height: 31px;padding-left:10px;padding-right:10px; padding-bottom:3px;width: 138px;}

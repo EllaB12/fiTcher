@@ -1,4 +1,4 @@
-//const teachers = [];
+// const teachers = [];
 
 let resDiv;
 let index = 0;
@@ -38,7 +38,7 @@ const render = () => {
     else {
         str = `<div style="text-align: center">
                     <div id="teacherCard" href="#">             
-                        <img class="teacherImage" src="data:image/png;base64,${teachers[index].picture}" alt="Card image">
+                        <img class="teacherImage" src="../${teachers[index].picture}" alt="Card image">
                         <div class="card-body">
                             <h4 class="card-title">${teachers[index].fullName}</h4>
                             <div> ${teachers[index].experience} </div>   

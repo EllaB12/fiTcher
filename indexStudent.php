@@ -9,7 +9,10 @@
      $user_id=$session->get_user_id();
      $user=new Student();
      $user->find_student_by_id($user_id);
-?>
+     
+     session_start();
+     $_POST['idTeacher']= $user_id;
+?>     
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +20,7 @@
   <meta charset="utf-8">
 
 
-  <title>Fitcher-Student</title>
+  <title>fiTcher - Student</title>
   <link rel="shortcut icon" href="Images/icon.png" type="image/x-icon"/>
   <meta content="width=device-width, initial-scale=1.0 , shrink-to-fit=no" name="viewport">
   <meta content="" name="keywords">
@@ -45,6 +48,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
   <!-- Load icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -86,14 +90,14 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
               <a class="dropdown-item" href=" <?php echo $url;?>"><i class='fas fa-user-circle'></i> אזור אישי</a>
-              <a class="dropdown-item" href="#" onclick='log_out();'><i class='fas fa-sign-out-alt'></i> התנתקות</a>
+              <a class="dropdown-item" href="logout.php" onclick='log_out()'><i class='fas fa-sign-out-alt'></i> התנתקות</a>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#footer">צור קשר</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#lesson">קבע פגישה</a>
+            <a class="nav-link" href="#lesson">קבע שיעור</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#payment">?כמה אני חייב</a>
@@ -119,9 +123,9 @@
     <!-- MY PROFILE- show details about students -->
     <section id="myProfile" > 
     		   <div class="card container">
-    		       <h1 align:"left" >הפרופיל שלי</h1>
-    		        <?php echo '<img alt="Avatar" style="width:150px; border-radius: 50%;   margin-left: auto;
-                    margin-right: auto; padding-bottom:30px;" src="data:image/jpeg;base64,'.base64_encode($user->get_picture() ).'"/>';?>
+    		       <h1 style="text-align:center" >הפרופיל שלי</h1>
+    		        <?php $img=$user->get_picture(); echo '<img alt="userPic" style="width:150px; border-radius: 50%;   margin-left: auto;
+                    margin-right: auto; padding-bottom:30px;" <img src="'.$img.'"/>';?>
         		   <div class="content">
                    <p><B> שם משתמש: </B><?php  echo $user->get_fullName() ?> </p>
                    <p><B> דואר אלקטרוני:</B> <?php  echo $user->get_email(); ?> </p> 
@@ -138,7 +142,6 @@
     <?php include_once("Includes/database.php");
     $conn= new Database();
     $conn= $conn->get_connection();//connection 
-    // $sql = "SELECT 	fullName, picture, description, experience, phoneNumber FROM teachers";// query to read data from table teachers
     $sql= "Select teachers.fullName,teachers.fullName, teachers.picture, teachers.description, teachers.experience, teachers.phoneNumber From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='$user_id'";
     $resultset = mysqli_query($conn, $sql) or die("database error:". mysqli_error($conn));
     $i=0;
@@ -146,10 +149,12 @@
     ?>
     <section align="right" dir="rtl">
         <div class="container1 col-md-6 col-md-offset-3 ">
-            <?php echo '<img alt="Avatar" style="width:150px" src="data:image/jpeg;base64,'.base64_encode( $record['picture'] ).'"/>';?>
+	        <?php $img=$record['picture']; echo '<img alt="userPic" style="width:150px; border-radius: 50%;   margin-left: auto;
+            margin-right: auto; " <img src="'.$img.'"/>';?>
             <p><span><B><?php echo $record['fullName']; ?></B></span> <?php echo $record['phoneNumber']; ?></p>
-            <p><?php echo $record['description']; ?><br>
-            <?php echo $record['experience']; ?></p>
+            <p><B><?php echo $record['experience']; ?></B><br>
+            <?php echo $record['description']; ?>
+            </p>
             </p>
             <?php
             //change to international num
@@ -175,9 +180,9 @@
                 <th>עלות השיעור</th>
                 <th>לתשלום</th>
                 <th>סטטוס תשלום</th>
-                <!--<th>-->
-                <!--  <input type="checkbox" id="checkAll">-->
-                <!--</th>-->
+                <th>
+                  <input type="checkbox" id="checkAll">
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -200,24 +205,77 @@
                     $new=$date.'/'.$month.'/'.$year;
                     echo $new;
                     ?></td>
-                    <td>  <?php echo $teacher->get_fullName(); ?></td>
-                    <td><?php  echo $teacher->get_price_by_id($user_id); ?></td>
+                    <td>  <?php echo $teacher->get_teacher_by_id($user_id,$id); ?></td>
+                    <td><?php  echo $teacher->get_price_by_id($user_id,$id); ?></td>
                     <td>
                         <button name="<?php echo $row['id'] ?>" class="fa fa-paypal" onclick="openForm()" id="<?php echo $row['paymentID']; ?>"> pay Pal </button>
                     </td>
-                    <td>  <?php 
+                    <td><?php 
                     if ($row['status']=='לא שולם'){
-                        echo "<p style=\"color:red;font-weight: bold\">".$row['status']."</p>"; }
-                    else 
+                        echo "<p style=\"color:red;font-weight: bold\">".$row['status']."</p>";
+                        echo "<td></td>";
+                        }
+                    else {
                         echo "<p style=\"color:green;font-weight: bold\">".$row['status']."</p>";
+                        echo '<td><input class="checkbox" type="checkbox" id="'.$row['paymentID'].'" name="id[]"></td>';
+                    }
                     ?></td>
-                    <!--<td><input class="checkbox" type="checkbox" id="" name="id[]"></td>-->
                   </tr>
                   
                <?php } ?>
 
             </tbody>
-        </table><br/>
+            
+        </table><br/>      
+        <button type="button" class="btn btn-danger" id="delete" style="background-color:#dc3545; width:20%;">מחק שיעורים ששולמו</button>
+      <!-- script for Payment table -->
+    <script>
+    $(document).ready(function(){
+        $('#checkAll').click(function(){
+          if(this.checked){
+              $('.checkbox').each(function(){
+                  this.checked = true;
+              });   
+          }else{
+              $('.checkbox').each(function(){
+                  this.checked = false;
+              });
+          } 
+        });
+
+
+    $('#delete').click(function(){
+       var dataArr  = new Array();
+       if($('input:checkbox:checked').length > 0){
+          $('input:checkbox:checked').each(function(){
+              dataArr.push($(this).attr('id'));
+              $(this).closest('tr').remove();
+          });
+          sendResponse(dataArr)
+       }else{
+         <!--alert('אין שיעורים שלא שולמו, כנראה קיבלתם את כל הכסף :)');-->
+         swal("אל תשכח לסמן את המפגש הרצוי", "ניתן למחוק רק פגישות ששולמו!", "info");
+       }
+
+    });  
+
+
+    function sendResponse(dataArr){
+        $.ajax({
+            type    : 'post',
+            url     : 'function.php',
+            data    : {'data' : dataArr},
+            success : function(response){
+                        alert(response);
+                      },
+            error   : function(errResponse){
+                      alert(errResponse);
+                      }                     
+        });
+    }
+
+  });
+</script>
         <script>
         	$('button').click(function(){	
         	var id = $(this).attr("name");
@@ -242,13 +300,13 @@
           <form action="paypal/first.php" class="form-container" method="post">
             <h3>תשלום באמצעות payPal</h3>
             <label><p> סכום לתשלום עבור שיעור</p> </label>
-            <input value="<?php $Teacher->get_price_by_id($user_id); ?>" type="text" id="money" placeholder="כמה כסף קיבלת?" name="price" pattern="[0-9]+" title="הכנס בבקשה רק מספרים" required>
+            <input value="<?php 
+            $Teacher->get_price_by_id2($user_id); ?>" type="text" id="money" placeholder="כמה כסף קיבלת?" name="price" pattern="[0-9]+" title="הכנס בבקשה רק מספרים" required>
             <button type="submit" class="" id="submit" name="submit" style="width:60%;"> לתשלום</button>
             <div id="lessonID"></div>
             <button type="button" style="width:60%;background-color:red;" id="cancel" onclick="closeForm()">סגור חלון</button>
           </form>
         </div>
-      <!--<button type="button" class="btn btn-danger" id="delete">מחק שיעורים</button>-->
     </section>
     
     
@@ -269,7 +327,7 @@
     
     <section id="lesson">
     <div class="card container" >
-    <h1>קביעת פגישה עם מורה</h1>
+    <h3 align="center">קביעת פגישה עם מורה</h3>
           <script>
             function teacherselected(){
               let tid = document.getElementById('teacher').value;
@@ -286,7 +344,7 @@
                       select.options[i] = null;
                     }
                     if(resp.length == 0){
-                      alert('לא נמצאו פגישות פנויות עבור המורה הנבחר');
+                      swal( "לא נמצאו פגישות עבור המורה הנבחר","אפשר לשלוח הודעת ווצאפ לבירור נוסף עם המורה" ,"warning");
                       document.getElementById("teacher").selectedIndex =0 ;
                     }else{
                       for(var i = 0; i<resp.length; i++){
@@ -315,10 +373,10 @@
                   data: "function=set&sid="+sid+"&mid="+mid,
                   success: function(resp){
                     if(resp.success){
-                      alert('הפגישה נקבעה בהצלחה');
+                    alert ("הפגישה נקבעה בהצלחה");
                       location.reload();
                     }else{
-                      alert('שגיאה בקביעת הפגישה');
+                    alert ("יש תקלה :(", "אנא נסה שוב או שלח הודעת ווצאפ למורה לבירור");
                     }
                   },
                   error: function(resp){
@@ -333,6 +391,7 @@
       <div class="content">
         <form action="" method="POST" onsubmit="addmeeting();return false">
             <div class="form-group">
+                 <label> בחר מורה</label>
                  <select id="teacher" class="form-control" onchange="teacherselected()" required >
                       <option disabled selected value></option>
                  <?php
@@ -344,17 +403,55 @@
                  </select>
             </div>
             <div class="form-group">
+                 <label> בחר תאריך ושעה</label>
                  <select id="meeting" class="form-control" required >
                  </select>
                 </div>
             <div class="form-group">
-                <button type="submit" id="submit" class="btn btn-primary">קבע</button>
+                <button type="submit" id="submit" class="btn">קבע</button>
             </div>
         </form>
       </div>
 
     </section>      <br><br>
-    
+        <section class="container"  align="center">
+       <h2 id="studentH1"class="container">השיעורים שלי</h2>
+        <table class="table table-striped" >
+            <thead>
+              <tr align="center">
+                <th>תאריך שיעור</th>
+                <th>שעת התחלה</th>
+                <th>שעת סיום</th>
+                <th>שם מורה פרטי</th>
+                <th>עלות השיעור</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <?php
+
+                require_once("getLesson.php");
+                  while($row  = mysqli_fetch_array($userObj)){ ?>
+                  <tr align="center">
+                    <td><?php
+                    $teacher=new Teacher();
+                    $id=$row['tid'];
+                    $teacher->find_teacher_by_id($id);
+                    echo $row['date'];
+                    ?></td>
+                    <td><?php echo $row['stime'];  ?></td>
+                    <td><?php  echo $row['etime'];  ?></td>
+                    <td>  <?php echo $teacher->get_teacher_by_id($user_id,$id); ?></td>
+                    <td><?php  echo $teacher->get_price_by_id($user_id,$id); ?></td>
+
+                  </tr>
+                  
+               <?php } ?>
+
+            </tbody>
+            
+        </table><br/> 
+    </section>
     
     
 <!--==========================   Footer   ============================-->
@@ -369,5 +466,6 @@
   </footer>
 
 </body>   
-  
+
+
 </html>

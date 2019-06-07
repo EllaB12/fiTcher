@@ -284,16 +284,7 @@ function myFunction() {
     x.className = "topnav";
   }
 }
-//  function cash() {
-//     $.ajax({
-//     type:"POST",
-//     url: "response.php",
-//     data: ({teacherID: <?php echo $user_id ?>}),
-//     success: function(){
-// }
 
-// });
-// }
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

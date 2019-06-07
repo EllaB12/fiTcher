@@ -3,16 +3,18 @@
 require_once('init.php');
 
 class Session{
+     // Attributes
     private $signed_in;
     private $user_id;
     
-    
+     // Methods
     public function __construct(){
         session_start();
         $this->check_login();
     }
     
-     private function check_login(){
+    
+    private function check_login(){
         if (isset($_SESSION['user_id'])){
             $this->user_id=$_SESSION['user_id'];
             $this->signed_in=true;
@@ -23,6 +25,7 @@ class Session{
         }
     }
     
+    
     public function login($user){
         if($user){
             $this->user_id=$user->get_id();
@@ -31,22 +34,26 @@ class Session{
         }
     }
     
+    
     public function logout(){
         echo 'logout';
         unset($_SESSION['user_id']);
         unset($this->user_id);
         $this->signed_in=false;
-        
     }
+    
     
     public function get_signed_in(){
         return $this->signed_in;
     }
+    
+    
     public function get_user_id(){
         return $this->user_id;
     }
      
 }
+
 $session=new Session();
 
 ?>

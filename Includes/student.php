@@ -5,7 +5,7 @@ require_once('init.php');
 class Student{
      // Attributes
     private $id;
-    private $fullName;
+    public $fullName;
     private $email;
     private $phoneNumber;
     private $parentPhone;
@@ -18,7 +18,6 @@ class Student{
     
     // Methods
     public static function fetch_students(){
-        
         global $database;
         $result_set=$database->query("select * from students");
         $students=null;
@@ -36,11 +35,13 @@ class Student{
         return $students;
     }
         
+        
     private function has_attribute($attribute){
         
         $object_properties=get_object_vars($this);
         return array_key_exists($attribute,$object_properties);
     }
+    
     
      private function  instantation($student_array){
         foreach ($student_array as $attribute=>$value){
@@ -49,23 +50,38 @@ class Student{
        }
      }
 	 
+	 
     public function find_student_by_id($id){
-        echo $id;
         global $database;
         $error=null;
         $result=$database->query("select * from students where id='".$id."'");
           if (!$result)
             $error='Can not find the student.  Error is:'.$database->get_connection()->error;
         else if ($result->num_rows>0){
-             echo $id;
             $found_student=$result->fetch_assoc();
             $this->instantation($found_student);
         }
          else
              $error="Can not find student by this ID";
         echo $error;
-        
     }
+    
+    
+    public static function find_by_id($id){
+        global $database;
+        $error=null;
+        $result=$database->query("select * from students where id='".$id."'");
+        if (!$result)
+            return null;
+        else if ($result->num_rows>0){
+            $found_teacher=$result->fetch_assoc();
+            $t = new Student;
+            $t->instantation($found_teacher);
+            return $t;
+        }
+        return null;
+    }
+    
     
     public function find_student_by_email($email){
         global $database;
@@ -82,6 +98,7 @@ class Student{
         return $error;
         
     }
+	
 	
     public static function add_student($id,$fullName,$email,$phoneNumber,$parentPhone,$city,$street,$picture,$class){
         global $database;
@@ -100,6 +117,7 @@ class Student{
         return $error;
     }
     
+    
     public function check_email_validation($email){
         global $database;
         $valid=null;
@@ -111,6 +129,7 @@ class Student{
             $valid=false;
         return $valid;
     }
+    
     
     public function check_id_validation($id){
         global $database;
@@ -125,8 +144,6 @@ class Student{
     }
     
 
-
-    
     public function get_picture(){
         return $this->picture;
     }

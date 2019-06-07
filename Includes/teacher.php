@@ -13,13 +13,13 @@ class Teacher{
     public $picture;
     public $experience;
     public $description;
-    public $video;
     public $price;
     public $cutPrice;
+    public $gender;
+    public $likes;
     
     // Methods
     public static function fetch_teachers(){
-        
         global $database;
         $result_set=$database->query("select * from teachers");
         $teachers=null;
@@ -58,25 +58,42 @@ class Teacher{
         return $teachers;
     }
     
-    
-    public static function matching(){
+
+    public static function matching($city,$subject,$grade){
         global $database;
-        $result_set=$database->query("select * from teachers");
+        $result_set=$database->query("select * from teachers join qualifications on teachers.id = qualifications.teacherID where qualifications.educationGroup='".$grade."' and qualifications.subjectID=('". $subject."') and teachers.city='".$city."' ");
         //$teachers=array();
         if (isset($result_set)){
             $i=0;
             if ($result_set->num_rows>0){ 
                 while($row=$result_set->fetch_assoc()){ 
-                    $teachers[]=array("fullName" => $row["fullName"], "city" => $row["city"],"experience" => $row["experience"],"picture" => base64_encode($row["picture"]),"description" => $row["description"]);
+                    $teachers[]=array("id" => $row["id"],"fullName" => $row["fullName"], "email" => $row["email"],"phoneNumber" => $row["phoneNumber"],"city" => $row["city"],"experience" => $row["experience"],"picture" => $row["picture"],"description" => $row["description"],"price" => $row["price"],"cutPrice" => $row["cutPrice"],"likes" => $row["likes"]);
+                }
+            }
+        }
+        
+        header('Content-Type: application/json');
+        echo json_encode($teachers);
+    }
+
+
+    public static function matching_with_gender($city,$subject,$grade,$gender){
+        global $database;
+        $result_set=$database->query("select * from teachers join qualifications on teachers.id = qualifications.teacherID where qualifications.educationGroup='".$grade."' and qualifications.subjectID=('". $subject."') and teachers.city='".$city."' and teachers.gender='".$gender."'");
+        //$teachers=array();
+        if (isset($result_set)){
+            $i=0;
+            if ($result_set->num_rows>0){ 
+                while($row=$result_set->fetch_assoc()){ 
+                    $teachers[]=array("id" => $row["id"],"fullName" => $row["fullName"], "email" => $row["email"],"phoneNumber" => $row["phoneNumber"],"city" => $row["city"],"experience" => $row["experience"],"picture" => $row["picture"],"description" => $row["description"],"price" => $row["price"],"cutPrice" => $row["cutPrice"],"likes" => $row["likes"]);
                 }
             }
         }
         header('Content-Type: application/json');
         
         echo json_encode($teachers);
-}
+    }
 
-    
         
     private function has_attribute($attribute){
         
@@ -84,12 +101,14 @@ class Teacher{
         return array_key_exists($attribute,$object_properties);
     }
     
+    
      private function  instantation($student_array){
         foreach ($student_array as $attribute=>$value){
             if ($result=$this->has_attribute($attribute))
                 $this->$attribute=$value;
        }
      }
+	 
 	 
     public static function find_teacher_by_id($id){
         global $database;
@@ -105,9 +124,9 @@ class Teacher{
         }
         return null;
     }
-    
 	
-    public static function add_teacher($id,$fullName,$email,$phoneNumber,$city,$street,$picture,$experience,$description,$video,$price,$cutPrice){
+	
+    public static function add_teacher($id,$fullName,$email,$phoneNumber,$city,$street,$picture,$experience,$description,$price,$cutPrice,$gender){
         global $database;
         $error=null;
         //checking if the Id is available in DB
@@ -116,13 +135,14 @@ class Teacher{
         $count_row = $check->num_rows;
         //if the Id is not in DB then insert into teachers
         if ($count_row == 0){
-        $sql="INSERT INTO teachers(id,fullName,email,phoneNumber,city,street,picture,experience,description,video,price,cutPrice) values ('$id','$fullName','$email','$phoneNumber','$city','$street','$picture','$experience','$description','$video','$price','$cutPrice')";
+        $sql="INSERT INTO teachers(id,fullName,email,phoneNumber,city,street,picture,experience,description,price,cutPrice,gender) values ('$id','$fullName','$email','$phoneNumber','$city','$street','$picture','$experience','$description','$price','$cutPrice','$gender')";
         $result=$database->query($sql);
         }
         if (!$result)
             $error='Can not add teacher.  Error is:'.$database->get_connection()->error;
         return $error;
     }
+    
     
     public static function fetch_teachers_home(){
         
@@ -139,32 +159,77 @@ class Teacher{
                 }
             }
         }
-
-        // header('Content-Type: application/json');
+        
         $myArray = (array)$teachers; 
         return $teachers;
-        
     }
     
-    public function get_teacher_by_id($id){
+    
+    public function get_teacher_by_id($id,$tid){
         global $database;
         $error=null;
-        $result=$database->query("Select teachers.fullName From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='".$id."'");
+        $result=$database->query("Select teachers.fullName From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='".$id."' AND studentTeacher.idTeacher='".$tid."'");
+        // $row = $result->fetch_assoc();
+        // echo ($row['fullName']);
+
         foreach($result as $row)
         {
             echo   "<B>".$row['fullName']."<br>";
         }
-            
-    }
-    public function get_price_by_id($id){
-    global $database;
-    $error=null;
-    $result=$database->query("Select teachers.price From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='".$id."'");
-    foreach($result as $row){
-        echo $row['price'];
-        }    
     }
     
+    
+    public function get_price_by_id($id, $tid){
+    global $database;
+        $error=null;
+        $result=$database->query("Select teachers.price From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='".$id."' AND studentTeacher.idTeacher='".$tid."'");
+        foreach($result as $row){
+            echo $row['price'];
+            }    
+    }
+    
+    
+    public function get_price_by_id2($id){
+    global $database;
+        $error=null;
+        $result=$database->query("Select teachers.price From studentTeacher join teachers on studentTeacher.idTeacher=teachers.id Where studentTeacher.idStudent ='".$id."' limit 1");
+        foreach($result as $row){
+            echo $row['price'];
+            }    
+    }
+
+    
+    public function check_email_validation($email){
+        global $database;
+        $valid=null;
+        $result=$database->query("select * from teachers where email='".$email."'");
+          if ($result->num_rows>0){
+            $valid= true;
+          }
+          else
+            $valid=false;
+        return $valid;
+    }
+
+
+    public function check_id_validation($id){
+        global $database;
+        $valid=null;
+        $result=$database->query("select * from teachers where id='".$id."'");
+          if ($result->num_rows>0){
+            $valid= true;
+          }
+          else
+            $valid=false;
+        return $valid;
+    }
+
+
+    public function addLike($teacherID){
+        global $database;
+        $sql="UPDATE teachers SET likes=likes+1 WHERE id='".$teacherID."'";
+        $result=$database->query($sql);
+    }
     
     
     public function get_id(){

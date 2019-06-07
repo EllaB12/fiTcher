@@ -1,6 +1,7 @@
 <?php  
 
 require_once('./Includes/teachermeetings.php');
+require_once('./Includes/student.php');
 
 if($_POST['function'] == "load"){
   $start = DateTime::createFromFormat('d-m-Y', DateTime::createFromFormat("d-m-Y G:i", $_POST['start'])->format("d-m-Y"));
@@ -20,9 +21,11 @@ if($_POST['function'] == "load"){
       if($m->sid == null){
         $s=$s.'"ack":"פגישה פנויה",';
       }else{
-        $s=$s.'"ack":"פגישה עם: '.$m->sid.'",';
+        $student = Student::find_by_id($m->sid);
+        $s=$s.'"ack":"פגישה עם: '.$student->fullName.'",';
       }
       $s=$s.'"time":"'.$m->stime.'",';
+      $s=$s.'"sname":"'.$m->stime.'",';
       $s=$s.'"date":"'.$m->date.'",';
       $s=$s.'"etime":"'.$m->etime.'"';
       
@@ -73,18 +76,33 @@ else if($_POST['function'] == "get"){
 else if($_POST['function'] == "set"){
   $sid = $_POST['sid'];
   $mid = $_POST['mid'];
-  $date = $_POST['date'];
-  $stime = $_POST['stime'];
-  $tid = $_POST['tid'];
-  TeacherMeeting::add_meeting_to_payment($sid,$tid,$date,$stime);
+  
   $error = TeacherMeeting::set_sid($mid,$sid);
+  $m = TeacherMeeting::find_by_id($mid);
+  if($m == null)
+  {
+      echo 'cant find the meeting';
+      
+  }
+  else
+  {
+     $result=explode('-',$m->date);
+      $date=$result[2];
+      $month=$result[1];
+      $year=$result[0];
+      $newdate=$date.'/'.$month.'/'.$year;
+     
+  TeacherMeeting::add_meeting_to_payment($sid,$m->tid,$newdate,$m->stime);
   echo '{"success": true}';
+      
+  }
 }
 else if($_POST['function'] == "delete"){
   $mid = $_POST['mid'];
   
   $error = TeacherMeeting::delete($mid);
   echo '{"success": true}';
+
 }
 
 ?>

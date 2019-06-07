@@ -1,4 +1,5 @@
 <?php
+//Get student and teacher id and send them to studentTeacher table
 include_once('Includes/init.php');
 
 $user_id = $_SESSION['user_id'];
@@ -13,6 +14,5 @@ if(isset($teacherID)){
         $teacher=new Teacher();
         $teacher->addLike($teacherID);
      }
-
 }
 ?>

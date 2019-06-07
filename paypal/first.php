@@ -45,8 +45,8 @@ $transaction->setAmount($amount)
     ->setInvoiceNumber(uniqid());
 
 $redirectUrls = new \PayPal\Api\RedirectUrls();
-$redirectUrls->setReturnUrl("http://isnoyra.mtacloud.co.il/Newfolder/indexStudent.php?approved=true")
-->setCancelUrl("http://isnoyra.mtacloud.co.il/Newfolder/indexStudent.php?approved=false");
+$redirectUrls->setReturnUrl("http://isnoyra.mtacloud.co.il/payPalLandingPage.php?approved=true")
+->setCancelUrl("http://isnoyra.mtacloud.co.il/payPalLandingPage.php?approved=false");
 
 $payment = new \PayPal\Api\Payment();
 $payment->setIntent('sale')

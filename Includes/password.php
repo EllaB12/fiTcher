@@ -2,17 +2,20 @@
   
 require_once('database.php');
 
+// Attributes
 class Password{
     private $userID;
     private $userName;
     private $password;
     private $permission;
-        
+    
+    // Methods    
     private function has_attribute($attribute){
         
         $object_properties=get_object_vars($this);
         return array_key_exists($attribute,$object_properties);
     }
+    
     
     private function instantation($pass_array){
         foreach ($pass_array as $attribute=>$value){
@@ -31,12 +34,13 @@ class Password{
             $error='Can not add password.  Error is:'.$database->get_connection()->error;
         return $error;
     }
+    
      
     public function find_user($userID,$password){
         global $database;
         $passwordmd5 = md5($password);
         $error=null;
-        $sql="select * from passwords where userID='".$userID."' and password='".$passwordmd5."' or password='".$password."' ";
+        $sql="select * from passwords where userID='".$userID."' and (password='".$passwordmd5."' or password='".$password."') ";
         $result=$database->query($sql);
         if (!$result)
             $error='Can not find the user.  Error is:'.$database->get_connection()->error;
@@ -48,6 +52,7 @@ class Password{
              $error='<p style="color:red, font-size:19px;"><b>הוזנו פרטים לא נכונים. נסה שוב</b></p>';
         return $error;
     }
+    
     
     public function find_user_by_id($id){
         global $database;
@@ -64,8 +69,8 @@ class Password{
 			 
 		 }
         return $error;
-        
     }
+   
    
     public function get_id(){
         return $this->userID;

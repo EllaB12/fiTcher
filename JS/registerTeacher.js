@@ -238,7 +238,7 @@ $(document).ready(function() {
         
         $(".next3").click(function(){
             //subject name validation
-            if($("#subjectText").val() == ""){
+            if($(".subjectText").val() == ""){
               document.getElementById('empty-subject-alert').style.display="block";
               }
               else{
@@ -248,8 +248,7 @@ $(document).ready(function() {
         });
         
         $(".next3").click(function(){
-               
-                if($("#subjectText").val() == ""){
+                if($(".subjectText").val() == ""){
                     //blank subject text
                 }
                 else{

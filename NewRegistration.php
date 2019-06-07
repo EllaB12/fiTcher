@@ -11,7 +11,6 @@ $phone = $_POST["phone"];
 $parent_phone = $_POST["parent_phone"];
 $grade = $_POST["grade"];
 $parent_phone = $_POST["parent_phone"];
-$img = $_POST["file"];
 $permission="1";
 
 $id ="";
@@ -53,7 +52,21 @@ if(isset($_POST['submit'])){
           echo '<script> alert("הדואר האלקטרוני שהזנת כבר קיים במערכת!")</script>';
     }
     else{  
-        $register_Students = $student->add_student($id,$fullName,$email,$phone,$parent_phone,$city,$street,$img,$grade);
+        //file uploading
+        if($_FILES["filename"]["name"]){
+		    $target_file = "Images/users_images/".$id."-".basename($_FILES["filename"]["name"]);
+        }
+        else{
+             $target_file = "Images/reading.png";
+        }
+        
+		if (!move_uploaded_file($_FILES["filename"]["tmp_name"], $target_file)) 
+            {
+            echo "Sorry, there was an error uploading your file.";
+            echo "<br>".$_FILES['filename']['error'];
+            }
+         
+        $register_Students = $student->add_student($id,$fullName,$email,$phone,$parent_phone,$city,$street,$target_file,$grade);
         $register_Password=$student_with_password->add_password($id,$fullName,md5($password),$permission);
         
         echo '<script> alert("ההרשמה בוצעה בהצלחה!")</script>';
@@ -119,17 +132,19 @@ if(isset($_POST['submit'])){
                           <img src="Images/reading.png" id="icon" alt="User Icon"/>
                       </div>
 
-                      <form  method="post" id="login-form" name="RegForm">
+                      <form  method="post" id="login-form" name="RegForm" enctype="multipart/form-data">
                          <!-- progressbar -->
                          <ul dir="rtl" id="progressbar">
                                 <li class="active">יצירת חשבון</li>  
                                 <li>פרטים אישיים</li> 
                                 <li>סיום!</li>
                         </ul>
-
+                        
                         <!-- fieldsets 1-->
                         <fieldset>
-                                <input required type="text" id="ID" name="id" placeholder="תעודת זהות" />
+                                 <a class="info" href="#">הורים לתלמידים? <span> אנא הכניסו את פרטי ילדכם והוסיפו את מספר הטלפון הנייד שלכם  </span></a></br>
+                                 
+                                <input required type="text" maxlength="9" id="ID" name="id" placeholder="תעודת זהות" />
                                 <h6 id="empty-id-alert" style="color:red; display:none; font-size:14px;">הזן תעודת זהות</h6>
                                 <h6 id="invalid-id-alert" style="color:red; display:none; font-size:14px;">תעודת זהות תקינה מכילה 9 ספרות</h6>
 
@@ -161,7 +176,6 @@ if(isset($_POST['submit'])){
                                 <h6 id="empty-city-alert" style="color:red; display:none; font-size:14px;">הזן עיר מגורים</h6>
                                 
                                 <script>
-                                    
                                     $( "#cityText" ).position({
                                       my: "right"
                                     });
@@ -201,13 +215,13 @@ if(isset($_POST['submit'])){
                                 <div id="img">
                                     <h5>בחר תמונת פרופיל:</h5>
                                         <div class="custom-file mb-3">
-                                          <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".jpg, .png, image/jpeg, image/png">
+                                          <input type="file" class="custom-file-input" id="customFile" name="filename" accept=".jpg, .png, image/jpeg, image/png" />
                                           <label lang="he" class="custom-file-label" for="customFile" width=100>בחר תמונה</label>
                                         </div>
                                 </div>
                       
                                 <script>
-                                // Add the following code if you want the name of the file appear on select
+                                // Add the following code so the name of the file appear on select
                                 $(".custom-file-input").on("change", function() {
                                   var fileName = $(this).val().split("\\").pop();
                                   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

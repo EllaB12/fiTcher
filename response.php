@@ -1,5 +1,4 @@
-
-<?php
+<?php	
 	//include connection file 
     include_once("Includes/init.php");
     $conn= new Database();
@@ -8,12 +7,11 @@
          header('Location: newLogin.php');
          exit;
       }
-    // $user_id=$session->get_user_id();
-    // $user=new Teacher();
-    // $user->find_teacher_by_id($user_id);
-    // session_start();
-    // $user_id = $_SESSION['id'];
-    // $teacherID = $_POST['teacherID'];
+      
+    $user_id=$session->get_user_id();
+    $user = Teacher::find_teacher_by_id($user_id);
+    $tid=$user->get_id();
+    
 	$params = $_REQUEST;
 	
 	$action = isset($params['action']) != '' ? $params['action'] : '';
@@ -30,7 +28,7 @@
 		$empCls->deleteEmployee($params);
 	 break;
 	 default:
-	 $empCls->getEmployees($params);
+	 $empCls->getEmployees($params,$tid);
 	 return;
 	}
 	
@@ -42,23 +40,20 @@
 		$this->conn = $connString;
 	}
     
-	public function getEmployees($params) {
-		
-		$this->data = $this->getRecords($params);
-		
+	public function getEmployees($params,$tid) {
+		$this->data = $this->getRecords($params,$tid);
 		echo json_encode($this->data);
 	}
-	function insertEmployee($params ) {
+	
+	function insertEmployee($params) {
 		$data = array();;
 		$sql = "INSERT INTO `students` (id, fullName, phoneNumber,parentPhone, email, city, street,class) VALUES('" . $params["id"] . "','" . $params["fullName"] . "', '" . $params["phoneNumber"] . "', '" . $params["parentPhone"] . "' ,'" . $params["email"] . "','". $params["city"] . "','" . $params["street"] . "','" . $params["class"] . "');  ";
         $sql .="INSERT INTO `passwords` (userID, userName, password, permission) VALUES('" . $params["id"] . "','" . $params["fullName"] . "',md5('" . $params["password"] . "'),1);";
         $sql .="INSERT INTO `studentTeacher` (idStudent, idTeacher, balance) VALUES('" . $params["id"] . "','" . $params["teacherID"] . "',0);";
 		echo $result = mysqli_multi_query($this->conn, $sql) or die("error to insert Student data");
-
 	}
 	
-	
-	function getRecords($params) {
+	function getRecords($params,$tid) {
 		$rp = isset($params['rowCount']) ? $params['rowCount'] : 10;
 		
 		if (isset($params['current'])) { $page  = $params['current']; } else { $page=1; };  
@@ -73,12 +68,18 @@
 
 			$where .=" OR phoneNumber LIKE '".$params['searchPhrase']."%' )";
 	   }
+	   
 	   if( !empty($params['sort']) ) {  
 			$where .=" ORDER By ".key($params['sort']) .' '.current($params['sort'])." ";
 		}
-	   // getting total number records without any search להוסיף תעודת זהות של session
-		$sql = "SELECT id, fullName, phoneNumber,parentPhone, email FROM `students` ";
-        // $sql = "Select students.id, students.fullName, students.phoneNumber,students.parentPhone, students.email From studentTeacher join students on studentTeacher.idStudent=students.id Where studentTeacher.idTeacher ='$idTeacher'";
+		
+		session_start();
+		$idTeacher=$_SESSION['idTeacher'];
+	   // getting total number records without any search 
+// 		$sql = "SELECT id, fullName, phoneNumber,parentPhone, email FROM `students` ";
+      
+        $sql = "SELECT id, fullName, phoneNumber,parentPhone, email FROM `students` join `studentTeacher` on idStudent=id WHERE idTeacher ='$tid'";
+echo $idTeacher;
 		$sqlTot .= $sql;
 		$sqlRec .= $sql;
 		
@@ -88,6 +89,7 @@
 			$sqlTot .= $where;
 			$sqlRec .= $where;
 		}
+		
 		if ($rp!=-1)
 		$sqlRec .= " LIMIT ". $start_from .",".$rp;
 		
@@ -108,6 +110,7 @@
 		
 		return $json_data;
 	}
+	
 	function updateEmployee($params) {
 		$data = array();
 		//print_R($_POST);die;

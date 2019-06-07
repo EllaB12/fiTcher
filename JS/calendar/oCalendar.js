@@ -950,9 +950,7 @@ $.fn.oCalendar = function(options) {
             var myEvent = data[j];
             var ids = myEvent.date.replace(/-/g,"_");
             var elem = $("#"+ids);
-            let last = j == data.length -1 || data[j].date != data[j+1].date;
-            //console.log(last +" "+ data[i].date+" "+(i<data.length-1?data[i+1].date:"no"));
-            if(last)
+            if(!elem[0].innerHTML.includes('צפה'))
             {
                 html = '<div class="monthMore event" rel="'+elem[0].id+'">צפה בהכל</div>';
                 elem.append(html);

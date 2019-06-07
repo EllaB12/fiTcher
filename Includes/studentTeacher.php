@@ -7,7 +7,7 @@ class studentTeacher{
     private $idStudent;
     private $idTeacher;
 
-    //Functions
+    //Methods
      public static function addMatch($idStudent,$idTeacher){
         global $database;
         $error=null;
@@ -19,6 +19,7 @@ class studentTeacher{
         return $error;
     }
     
+    
     public function check_studentTeacher_validation($idStudent,$idTeacher){
         global $database;
         $valid=null;
@@ -28,11 +29,9 @@ class studentTeacher{
           }
           else
             $valid=false;
+            
         return $valid;
     }
-    
-  
-     
 }
 
 ?>

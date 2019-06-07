@@ -44,7 +44,7 @@ a:hover [class*="some"]{
 
 .centro{
     text-align: center;
-    padding-bottom: 20px;
+    padding-top: 20px !important;
 }
 
 .btn{
@@ -96,7 +96,7 @@ a:hover [class*="some"]{
 }
 
 .cardi{
-    color:  #053842 !important;
+     color:RGB(59,59,59) !important;
 }
 
 .cardi:hover{
@@ -123,15 +123,41 @@ hr{
 body{
     padding-right: 0px !important;
     padding-left: 0px !important;
+    color:RGB(59,59,59) !important;
 }
+
 .trol{
     padding-right: 0px !important;
     padding-left: 0px !important;
 }
 
 #regi{
-    padding-bottom: 10px;
     padding-top: 10px;
 }
 
+.mainImg{
+    color:RGB(59,59,59);
+    font-size:60px;
+}
 
+.Tletter{
+    font-weight:bold;
+    font-size:80px;
+    color:#116677;
+}
+
+
+.mainSent{
+    color:RGB(59,59,59);
+    font-size:23px;
+}
+
+.centered {
+  position: absolute;
+  top: 57%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+  color:RGB(59,59,59);
+  font-size:45px;
+  font-weight:bold;
+}

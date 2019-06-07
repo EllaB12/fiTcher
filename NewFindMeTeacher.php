@@ -44,7 +44,7 @@
   
      <!--Java Script-->
     <script src="JS/cityautocomplete.js"></script>
-    <script src="JS/subjectAutocomplete.js"></script>
+    <script src="JS/subjectautocomplete.js"></script>
     <script src="JS/findMyTeacher.js"></script>
     <script>  
          $(document).ready(function(){  
@@ -78,9 +78,6 @@
     
    
 </head>
-
-
-
 
 <header dir="ltr">
       <!--========================== Header ============================-->
@@ -125,6 +122,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="indexStudent.php#footer">צור קשר</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="indexStudent.php#lesson">קבע שיעור</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="indexStudent.php#payment">?כמה אני חייב</a>
@@ -226,22 +226,13 @@
                                 <input type="submit" id="submit" name="submit" class="next3 action-button" value="!match" onsubmit="subject_validation()"/></br>
                          </fieldest>
                          
-                      <!--<a href="homePageNew.php" class="home-link inactive underlineHover fadeIn fourth" style="margin:0; margin-bottom:10px;"> <i class="fa fa-home"></i> חזרה לעמוד הבית</a>      -->       
                       </form>
                     </div>
                 </div>        
         </div>
   </div>
-<!--   <script>
-    function subject_validation() {
-       
-        var subject = document.forms["RegForm"]["subject"]; 
-        var notValid="יש לבחור לפחות מקצוע לימוד אחד";
-         if (subject.value == " ") {
-            document.getElementById("empty-subject-alert").style.display="block";
-        }
-    }
-    </script>-->
+
+
 <!--==========================   Footer   ============================-->
  <!-- Footer -->
   <footer class="py-5 bg-dark">
@@ -253,8 +244,8 @@
     <!-- /.container -->
   </footer>
   
-
 </body>
+
 <script>
 function log_out(){
         window.location='logout.php';

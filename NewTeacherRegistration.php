@@ -13,7 +13,6 @@ $price = $_POST["price"];
 $cutPrice = $_POST["cutPrice"];
 $gender = $_POST["gender"];
 $password = $_POST["password"];
-$img = $_POST["file"];
 $permission="2";
 
 $id ="";
@@ -54,11 +53,25 @@ if(isset($_POST['submit'])){
     {
          echo '<script> alert("הדואר האלקטרוני שהזנת כבר קיים במערכת!")</script>';
     }
-    else{  
-        $register_teacher = $teacher->add_teacher($id,$fullName,$email,$phone,$city,$street,$picture,$experience,$description,$price,$cutPrice,$gender);
+    else{
+       //file uploading
+        if($_FILES["filename"]["name"]){
+		    $target_file = "Images/users_images/".$id."-".basename($_FILES["filename"]["name"]);
+        }
+        else{
+             $target_file = "Images/teaching.png";
+        }
+        
+		if (!move_uploaded_file($_FILES["filename"]["tmp_name"], $target_file)) 
+            {
+            echo "Sorry, there was an error uploading your file.";
+            echo "<br>".$_FILES['filename']['error'];
+            }
+            
+        $register_teacher = $teacher->add_teacher($id,$fullName,$email,$phone,$city,$street,$target_file,$experience,$description,$price,$cutPrice,$gender);
         $register_Password=$teacher_with_password->add_password($id,$fullName,md5($password),$permission);
         
-          $number = count($_POST["name"]);  
+        $number = count($_POST["name"]);  
           
           if($number > 0)  
              {  
@@ -79,9 +92,8 @@ if(isset($_POST['submit'])){
                        }  
                   }  
                 //   echo "Data Inserted";  
-             }  
-        
-        // echo '<script> alert("ההרשמה בוצעה בהצלחה!")</script>';
+            }  
+    
         header("Location: newLogin.php");
    	}
 }
@@ -125,7 +137,7 @@ if(isset($_POST['submit'])){
     
      <!--Java Script-->
     <script src="JS/registerTeacher.js"></script>
-    <script src="JS/subjectAutocomplete.js"></script>
+    <script src="JS/subjectautocomplete.js"></script>
     <script src="JS/cityautocomplete.js"></script>
     <script>  
          $(document).ready(function(){  
@@ -153,8 +165,6 @@ if(isset($_POST['submit'])){
          });  
     </script>
 
-    
-    
 </head>
 <body dir="rtl">
         <div class="wrapper fadeInDown">
@@ -168,7 +178,7 @@ if(isset($_POST['submit'])){
                           <img src="Images/teaching.png" id="icon" alt="User Icon"/>
                       </div>
 
-                      <form  method="post" id="login-form" name="RegForm">
+                      <form  method="post" id="login-form" name="RegForm" enctype="multipart/form-data">
                          <!-- progressbar -->
                          <ul dir="rtl" id="progressbar">
                                 <li class="active">יצירת חשבון</li>  
@@ -221,8 +231,8 @@ if(isset($_POST['submit'])){
                                         </div>
                                 </div>
                       
-                                    <script>
-                                // Add the following code if you want the name of the file appear on select
+                                <script>
+                                // Add the following code so the file will appear on select
                                 $(".custom-file-input").on("change", function() {
                                   var fileName = $(this).val().split("\\").pop();
                                   $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -262,7 +272,7 @@ if(isset($_POST['submit'])){
                                 <div class="appending_div">
                                       <table class="table" id="dynamic_field">  
                                           <tr>  
-                                            <td><input type="text" name="name[]" placeholder="מקצוע לימוד" class= "subjectText"required /></td>  
+                                            <td><input type="text" name="name[]" placeholder="מקצוע לימוד" class= "subjectText" required /></td>
                                             <td> 
                                                 <select name="grade[]" >
                                                      <option value="" disabled selected >רמה</option>
@@ -288,7 +298,6 @@ if(isset($_POST['submit'])){
                                  <a href="homePageNew.php" id="homelink" class="home-link inactive underlineHover fadeIn fourth" style="margin:0; margin-bottom:10px;"> <i class="fa fa-home" style="color:#0d0d0d;"></i> חזרה לעמוד הבית</a>
                          </fieldest>
                     
-                         
                       </form>
                     </div>
                 </div>        

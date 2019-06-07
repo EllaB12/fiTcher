@@ -7,8 +7,8 @@ class Subject{
     private $ID;
     private $name;
 
+    // Methods
     public static function fetch_subjects(){
-        
         global $database;
         $result_set=$database->query("select * from subjects");
         $subjects=array();
@@ -20,10 +20,11 @@ class Subject{
                 }
             }
         }
-        header('Content-Type: application/json');
         
+        header('Content-Type: application/json');
         echo json_encode($subjects);
     }
+    
     
     private function has_attribute($attribute){
         
@@ -31,12 +32,14 @@ class Subject{
         return array_key_exists($attribute,$object_properties);
     }
     
+    
      private function  instantation($student_array){
         foreach ($student_array as $attribute=>$value){
             if ($result=$this->has_attribute($attribute))
                 $this->$attribute=$value;
        }
     }
+    
     
     public function find_subject_by_name($name){
         global $database;
@@ -53,11 +56,11 @@ class Subject{
         return $error;
     }
     
+    
     public function get_id(){
         return $this->ID;
     }
 
-     
 }
 
 ?>

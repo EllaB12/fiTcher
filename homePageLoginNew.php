@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -30,6 +29,8 @@
                 window.location='logout.php';
             }
  </script>
+ 
+ 
 <body>
 
   <!-- Navigation -->
@@ -75,7 +76,7 @@
             <a class="nav-link" href="#footer">צור קשר</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#choosenT">מורים נבחרים</a>
+            <a class="nav-link" href="#regi">הרשמה</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="homePageLoginNew.php">עמוד הבית</a>
@@ -87,42 +88,15 @@
 
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+        <div class="carousel-item active" style="background-image: url('Images/backgroundHome.png')">
           <div class="carousel-caption d-none d-md-block">
-            <h3>First Slide</h3>
-            <p>This is a description for the first slide.</p>
+            <h1 class="mainImg">fi<span class="Tletter">T</span>cher</h1>
+            <p class="mainSent">להצלחה בלימודים צריך שני צדדים</p>
+            <a href="#regi" class="btn some" style="background-color:green; font-size:18px">הירשמו עכשיו</a>
           </div>
         </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Second Slide</h3>
-            <p>This is a description for the second slide.</p>
-          </div>
-        </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Third Slide</h3>
-            <p>This is a description for the third slide.</p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
     </div>
   </header>
 
@@ -130,8 +104,8 @@
   <div class="trol">
   <div class="container"> 
 
-    <!-- Portfolio Section -->
-    <h1 class="my-4 centro">מתאימים לך אישית</h1>
+  <!-- Portfolio Section -->
+     <h1 class="my-4 centro">מה אנחנו מציעים</h1>
 
     <div class="row">
       <div class="col-lg-3 col-sm-6 portfolio-item">
@@ -152,7 +126,7 @@
           </div>
           <div class="card-body">
             <h4 class="card-title cardi">פרופיל לניהול אישי</h4>
-            <p class="card-text">צפייה ועדכון הפרטים האישיים ובמורים</p>
+            <p class="card-text">גישה נוחה לפרופיל ולפעולות החשובות לך</p>
           </div>
         </div>
       </div>
@@ -163,7 +137,7 @@
           </div>
           <div class="card-body">
             <h4 class="card-title cardi">יצירת התאמה</h4>
-            <p class="card-text">ממליצים לך על מורים המתאימים לפרופיל שלך ולמבחנים שלך</p>
+            <p class="card-text">ממליצים לך על מורים בהתאם להעדפות האישיות שלך</p>
           </div>
         </div>
       </div>
@@ -174,163 +148,66 @@
           </div>
           <div class="card-body">
             <h4 class="card-title cardi">שיעור בלחיצת כפתור</h4>
-            <p class="card-text">קביעת שיעור בהתאם ליומן המורה</p>
+            <p class="card-text">קביעת שיעור בקלות בהתאם ליומן המורה</p>
           </div>
         </div>
       </div>
-      <!-- <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Five</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Six</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-          </div>
-        </div>
-      </div> -->
     </div>
-    <!--/.row-->
-    
-    <!-- Features Section -->
-    <!-- <div class="row">
-      <div class="col-lg-6">
-        <h2>Modern Business Features</h2>
-        <p>The Modern Business template by Start Bootstrap includes:</p>
-        <ul>
-          <li>
-            <strong>Bootstrap v4</strong>
-          </li>
-          <li>jQuery</li>
-          <li>Font Awesome</li>
-          <li>Working contact form with validation</li>
-          <li>Unstyled page elements for easy customization</li>
-        </ul>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-      </div>
-      <div class="col-lg-6">
-        <img class="img-fluid rounded" src="images/logo.png" alt="">
-      </div>
-    </div> -->
-    <!-- /.row -->
+
     <hr>
+    
     <div class="registartion">
     <h1  id="regi" class="my-4 centro">הרשמה</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row" id="aria">
       <div class="col-lg-6 mb-6 centro">
-        <!-- <div class="card h-100"> -->
-          <!-- <h4 class="card-header">תלמיד</h4> -->
-          <div class="card-body">
-            <img src="Images/student.png" height=95 width=90> 
+          <div class="card-body" style="width:100%; height:50%;">
+            <img src="Images/studentReg.png" width=140> 
           </div>
           <div class="card-footer">
-            <a href="#" class="btn some">אני תלמיד</a>
+            <a href="NewRegistration.php" class="btn some">אני תלמיד</a>
           </div>
         <!-- </div> -->
       </div>
       <div class="col-lg-6 mb-6 centro">
-        <!-- <div class="card h-100"> -->
-          <!-- <h4 class="card-header">מורה</h4> -->
-          <div class="card-body">
-            <img src="Images/education.png" height=90 width=90> 
+          <div class="card-body" style="width:100%; height:49%;">
+            <img src="Images/teacherReg.png"  width=140> 
           </div>
           <div class="card-footer">
-            <a href="#" class="btn">אני מורה</a>
+            <a href="NewTeacherRegistration.php" class="btn">אני מורה</a>
           </div>
         <!-- </div> -->
       </div>
-      <!-- <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div> -->
+
     </div>
     <!-- /.row -->
     </div>
-
-    <h1 class="my-4 centro">המורים הנבחרים שלנו</h1>
-
+    
+    <hr>
+    <h1 dir="rtl" class="my-4 centro">עושים לכם את זה קל יותר...</h1>
     <div class="row" id="choosenT">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="col-lg-6 col-sm-6 portfolio-item">
+        <div dir="rtl" class="card h-100 centro">
+          <img class="center2" src="Images/paypal-logo.png" height=90 width=95>
+          <div class="card-body">
+            <h4 class="card-title cardi">תשלום באשראי עם PayPal</h4>
+            <p class="card-text"> ביצוע תשלום מאובטח יותר</P>
+          </div>
+        </div>
+      </div>
+      <div dir="rtl" class="col-lg-6 col-sm-6 portfolio-item">
         <div class="card h-100 centro">
-          <img class="center2" src="Images/logo.png" height=70 width=120>
+          <img class="center2" src="Images/whatsappimg.png" height=90 width=95>
           <div class="card-body">
-            <h4 class="card-title cardi">תשלום נוח</h4>
-            <p class="card-text">תשלום עבור שיעורים בכרטיס אשראי ובמזומן</p>
+            <h4 class="card-title cardi">WhatsApp בלחיצת כפתור</h4>
+            <p class="card-text">תקשורת פשוטה עם המורה</p>
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100 centro">
-          <img class="center2" src="Images/logo.png" height=70 width=120>
-          <div class="card-body">
-            <h4 class="card-title cardi">תשלום נוח</h4>
-            <p class="card-text">תשלום עבור שיעורים בכרטיס אשראי ובמזומן</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100 centro">
-          <img class="center2" src="Images/logo.png" height=70 width=120>
-          <div class="card-body">
-            <h4 class="card-title cardi">תשלום נוח</h4>
-            <p class="card-text">תשלום עבור שיעורים בכרטיס אשראי ובמזומן</p>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Five</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Six</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-          </div>
-        </div>
-      </div> -->
     </div>
-
-    <!-- Call to Action Section -->
-    <!-- <div class="row mb-4">
-      <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-      </div>
-    </div> -->
-
+  </div>
+  </div>
   </div>
   <!-- /.container -->
 

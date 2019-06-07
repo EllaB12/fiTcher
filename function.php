@@ -8,7 +8,7 @@ include_once("Includes/init.php");
 	$dataArr = $_POST['data'] ; 
 
 	foreach($dataArr as $id){
-		mysqli_query($conn , "DELETE FROM payments where student.id='$id'");
+		mysqli_query($conn , "DELETE FROM payments where paymentID='$id'and status='שולם' ");
 	}
 	echo 'שיעור נמחק בהצלחה';
 }

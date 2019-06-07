@@ -7,7 +7,6 @@ class City{
     private $name;
 
     public static function fetch_cities(){
-        
         global $database;
         $result_set=$database->query("select * from cities");
         $cities=array();
@@ -19,17 +18,13 @@ class City{
                 }
             }
         }
-        header('Content-Type: application/json');
         
+        header('Content-Type: application/json');
         echo json_encode($cities);
-}
+    }
 
-  
-    
-    
 
     private function has_attribute($attribute){
-        
         $object_properties=get_object_vars($this);
         return array_key_exists($attribute,$object_properties);
     }
@@ -41,7 +36,4 @@ class City{
        }
      }
 }
-
-/*$city=new City();
-$city->fetch_cities();*/
 ?>
